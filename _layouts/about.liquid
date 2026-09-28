@@ -2,7 +2,6 @@
 layout: default
 ---
 <div class="post">
-
   <article>
     {% if page.profile %}
       <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
@@ -39,12 +38,10 @@ layout: default
         </h1>
         <p class="desc">{{ page.subtitle }}</p>
       </header>
-    
-      <!-- Social -->
+
       {% if page.social %}
         <div class="social">
-          <div class="contact-icons">{% include social.liquid %}</div>
-
+          <div class="contact-icons">{% social_links %}</div>
           <div class="contact-note">{{ site.contact_note }}</div>
         </div>
       {% endif %}
@@ -60,6 +57,14 @@ layout: default
       {% include news.liquid limit=true %}
     {% endif %}
 
+    <!-- Latest posts -->
+    {% if page.latest_posts and page.latest_posts.enabled %}
+      <h2>
+        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
+      </h2>
+      {% include latest_posts.liquid %}
+    {% endif %}
+
     <!-- Selected papers -->
     {% if page.selected_papers %}
       <h2>
@@ -69,7 +74,11 @@ layout: default
     {% endif %}
 
     {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
-      {% include newsletter.liquid center=true %}
+      {% if site.plugins contains 'al_newsletter' %}
+        {% include plugins/al_newsletter_form_center_margin.liquid %}
+      {% else %}
+        {% include newsletter.liquid center=true %}
+      {% endif %}
     {% endif %}
   </article>
 </div>
