@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://cse.msu.edu//~suyiyan1//sitemap.xml
+Sitemap: https://yiyang-su.github.io/sitemap.xml
